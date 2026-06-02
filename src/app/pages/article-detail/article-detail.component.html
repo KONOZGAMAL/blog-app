@@ -1,0 +1,47 @@
+<!-- @if (article) {
+  <div class="max-w-3xl mx-auto px-4 py-10">
+
+    <button
+      (click)="goBack()"
+      class="flex items-center gap-2 text-primary hover:underline mb-8"
+    >
+      <i class="ti ti-arrow-right"></i>
+      <span>العودة للرئيسية</span>
+    </button>
+
+    <span class="text-sm font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+      {{ article.category }}
+    </span>
+
+    <h1 class="text-3xl font-bold mt-4 mb-3 leading-snug">{{ article.title }}</h1>
+
+    <div class="flex items-center gap-2 text-gray-400 text-sm mb-6">
+      <i class="ti ti-clock"></i>
+      <span>{{ article.readTime }} للقراءة</span>
+    </div>
+
+    <img
+      [src]="article.image"
+      [alt]="article.title"
+      class="w-full rounded-2xl mb-8 object-cover max-h-80"
+    />
+
+    <p class="text-gray-600 text-lg leading-relaxed mb-8">{{ article.description }}</p>
+
+    <div class="bg-white rounded-2xl p-6 text-gray-800 leading-loose whitespace-pre-line">
+      {{ article.content }}
+    </div>
+
+  </div>
+} @else {
+  <div class="flex flex-col items-center justify-center py-32 text-gray-400">
+    <i class="ti ti-file-off text-6xl mb-4"></i>
+    <p class="text-xl">المقال غير موجود</p>
+    <button
+      (click)="goBack()"
+      class="mt-6 text-primary hover:underline"
+    >
+      العودة للرئيسية
+    </button>
+  </div>
+} -->

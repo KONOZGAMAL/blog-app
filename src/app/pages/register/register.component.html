@@ -1,0 +1,84 @@
+<section class="min-h-[500px] my-8 flex items-center justify-center">
+  <div class="w-full max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl text-center font-bold mb-2">إنشاء حساب جديد</h1>
+    <p class="text-center text-gray-600 mb-6">أهلاً بك مجدداً في مدوّنتي</p>
+    <form class="" (ngSubmit)="submit()" [formGroup]="registerForm">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 mb-2">الاسم</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          formControlName="userName"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <small
+          *ngIf="
+            registerForm.get('userName')?.invalid &&
+            registerForm.get('userName')?.touched
+          "
+          class="text-red-500 text-sm"
+        >
+          الاسم مطلوب ويجب أن يكون بين 3 و 20 حرفًا.
+        </small>
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 mb-2"
+          >البريد الإلكتروني</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <small
+          *ngIf="
+            registerForm.get('email')?.invalid &&
+            registerForm.get('email')?.touched
+          "
+          class="text-red-500 text-sm"
+        >
+          البريد الإلكتروني مطلوب ويجب أن يكون عنوان بريد إلكتروني صالحًا.
+        </small>
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block text-gray-700 mb-2"
+          >كلمة المرور</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <small
+          *ngIf="
+            registerForm.get('password')?.invalid &&
+            registerForm.get(
+              'password
+'
+            )?.touched
+          "
+          class="text-red-500 text-sm"
+        >
+          كلمة المرور مطلوبة ويجب أن تكون 6 أحرف على الأقل.
+        </small>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-primary text-white py-2 rounded-lg"
+      >
+        إنشاء الحساب
+      </button>
+    </form>
+    <p class="text-center text-gray-600 mt-4">
+      ليس لديك حساب؟
+      <button routerLink="/login" class="text-primary font-semibold">
+        تسجيل الدخول
+      </button>
+    </p>
+  </div>
+</section>

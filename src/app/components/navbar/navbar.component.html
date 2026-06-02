@@ -1,0 +1,70 @@
+<nav class="flex items-center justify-between h-[60px] border-b border-gray-100 py-8">
+
+  <a
+    routerLink="/"
+    class="flex items-center gap-2 text-xl font-bold text-gray-900 no-underline shrink-0"
+  >
+    <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+    مدوّنتي
+  </a>
+
+  <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0">
+    <li>
+      <a
+        routerLink="/"
+        routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
+      >
+        الرئيسية
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/articles"
+        routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
+      >
+        المقالات
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/categories"
+        routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
+      >
+        التصنيفات
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/about"
+        routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
+      >
+        عن الموقع
+      </a>
+    </li>
+  </ul>
+
+  <div class="flex items-center gap-2">
+      <span *ngIf="userName" class="text-sm text-gray-500">مرحباً، {{ userName }}</span>
+    <button
+     routerLink="/login"
+     *ngIf="!userName"
+     class="flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all">
+      تسجيل الدخول
+    </button>
+    <button
+      routerLink="/add"
+      class="text-sm font-semibold text-white bg-primary px-4 py-1.5 rounded-lg hover:bg-primary/80 transition-all shrink-0"
+    >
+      + اكتب مقال
+    </button>
+  </div>
+
+</nav>

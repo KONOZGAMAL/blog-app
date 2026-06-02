@@ -1,0 +1,45 @@
+<div>
+  <div class="mt-6">
+    <ul class="flex flex-wrap gap-1 md:gap-3 text-sm font-medium text-gray-500">
+      @for(categorie of categories ; track categorie){
+           <li
+        class="hover:bg-primary hover:text-white cursor-pointer px-4 py-2 rounded-lg"
+        [ngClass]="{'bg-primary text-white' : activeCategory === categorie , 'bg-[#d5d5dc]' : activeCategory !== categorie}"
+        (click)="changeCategory(categorie)"
+      >
+        {{categorie.toUpperCase()}}
+      </li>
+      }
+    </ul>
+
+    <div class="articles-grid">
+      @for(article of filteredArticles ; track article.id){
+           <div
+        class="rounded-3xl bg-white hover:scale-[1.02] h-fit pb-1 transition-transform duration-500 ease-out"
+      >
+        <img
+          [src]="article.image"
+          class="w-full h-1/2 rounded-t-3xl"
+        />
+        <div class="flex flex-col gap-3 p-5">
+          <h2 class="text-primary">{{article.category}}</h2>
+          <div class="h-[120px]">
+            <h4 class="text-lg font-semibold">{{article.title}}</h4>
+            <p class="text-gray-700">
+              {{article.description}}
+            </p>
+          </div>
+          <div class="flex items-center justify-between mt-4">
+            <span>{{article.readTime}}</span>
+            <button (click)="readMore(article.id)" class="text-primary flex justify-center items-center hover:underline">
+              <span>اقرأ المزيد</span>
+              <i class="ti ti-arrow-left"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      }  @empty  {<p class="text-gray-500">لا توجد مقالات في هذا القسم</p>}
+    </div>
+  </div>
+</div>
