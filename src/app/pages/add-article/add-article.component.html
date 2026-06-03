@@ -1,67 +1,52 @@
-
-<section class="bg-white p-6 rounded shadow-md max-w-2xl mx-auto mt-10">
+<section class="bg-white p-6 my-8 rounded shadow-md max-w-2xl mx-auto mt-10">
   <h1 class="text-2xl font-bold mb-4">إضافة مقال</h1>
 
-  <form class="space-y-4">
-
-    <select  class="w-full border p-2 rounded">
+  <form
+    class="flex flex-col gap-4"
+    [formGroup]="articleForm"
+    (ngSubmit)="submitArticle()"
+  >
+    <select class="w-full border p-2 rounded" [formControlName]="'category'">
       <option value="">اختار الفئة</option>
-      <!-- <option *ngFor="let cat of categories" [value]="cat">
+      <option *ngFor="let cat of categories" [value]="cat">
         {{ cat }}
-      </option> -->
+      </option>
     </select>
 
-    <div>
-     <label class="block mb-1 font-medium">العنوان</label>
-      <input
+    <input
       type="text"
-      placeholder="Title"
+      placeholder="العنوان"
       class="w-full border p-2 rounded"
-      />
-    </div>
+      [formControlName]="'title'"
+    />
 
-    <div>
-      <label class="block mb-1 font-medium">الوصف</label>
-      <textarea
-        placeholder="Description"
-        class="w-full border p-2 rounded"
-      ></textarea>
-    </div>
-
-    <!-- Image -->
-    <div>
-      <label class="block mb-1 font-medium">صورة المقال</label>
-      <input
-        type="text"
-        placeholder="Image URL"
-        class="w-full border p-2 rounded"
-      />
-    </div>
-
-    <div>
-      <label class="block mb-1 font-medium">وقت القراءة</label>
-      <input
-        type="text"
-        placeholder="Read Time (e.g. 5 min)"
-        class="w-full border p-2 rounded"
-      />
-    </div>
-
-    <div>
-      <label class="block mb-1 font-medium">المحتوى</label>
-      <textarea
-        placeholder="Content"
-        rows="6"
+    <input
+      type="text"
+      formControlName="imageUrl"
+      placeholder="ضع رابط الصورة المباشر (.jpg أو .png)"
       class="w-full border p-2 rounded"
+    />
+    <input
+      type="text"
+      placeholder="وقت القراءة (e.g. 5 min)"
+      class="w-full border p-2 rounded"
+      [formControlName]="'readTime'"
+    />
+    <textarea
+      placeholder="الوصف"
+      class="w-full border p-2 rounded"
+      [formControlName]="'description'"
     ></textarea>
-    </div>
 
-    <button
-      type="submit"
-      class="bg-primary text-white px-4 py-2 rounded"
-    >
+    <textarea
+      placeholder="المحتوى الكامل للمقال"
+      rows="6"
+      class="w-full border p-2 rounded"
+      [formControlName]="'content'"
+    ></textarea>
+
+    <button type="submit" class="bg-primary text-white px-4 py-2 rounded">
       إرسال
     </button>
-
   </form>
 </section>

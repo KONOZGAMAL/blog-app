@@ -1,6 +1,7 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ArticleService } from '../../../services/article.service';
 
 interface IArticle {
   id: number;
@@ -18,48 +19,21 @@ interface IArticle {
   templateUrl: './app-category-filter.component.html',
   styleUrls: ['./app-category-filter.component.css'],
 })
-export class AppCategoryFilterComponent {
+export class AppCategoryFilterComponent implements OnInit {
   activeCategory: string = 'all';
   categories: string[] = ['all', 'Tips', 'CSS', 'Angular', 'React'];
-  articles: IArticle[] = [
-    {
-      id: 2,
-      category: 'Angular',
-      title: 'بناء تطبيقات ضخمة بـ Angular',
-      description: 'تعرف على كيفية تنظيم الكود وإدارة الحالات المعقدة في المشاريع الكبيرة.',
-      image: './assets/images/unnamed.png',
-      readTime: '5 دقايق',
-    },
-    {
-      id: 1,
-      category: 'CSS',
-      title: 'أسرار CSS Grid الحديثة',
-      description: 'توقف عن استخدام العائمات وابدأ في بناء شبكات مرنة واحترافية بسهولة.',
-      image: './assets/images/css.png',
-      readTime: '8 دقايق',
-    },
-    {
-      id: 4,
-      category: 'React',
-      title: 'React 18: ما الجديد للمطور؟',
-      description: 'شرح مبسط للميزات الجديدة مثل Concurrent Rendering و Suspense.',
-      image: './assets/images/react.png',
-      readTime: '7 دقايق',
-    },
-    {
-      id: 3,
-      category: 'Tips',
-      title: '5 نصائح لزيادة إنتاجيتك',
-      description: 'طرق فعالة لتنظيم يومك البرمجي وتقليل التشتت أثناء العمل عن بعد.',
-      image: './assets/images/tips.png',
-      readTime: '4 دقايق',
-    },
-  ];
+
+  articleService = inject(ArticleService);
+  articles: IArticle[] = [];
 
   constructor(private router: Router) {}
 
   changeCategory(category: string) {
     this.activeCategory = category;
+  }
+
+  ngOnInit(): void {
+    this.articles = this.articleService.getAll();
   }
 
   get filteredArticles() {
