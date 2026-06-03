@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AppFeaturedCardComponent } from '../../components/home/app-featured-card/app-featured-card.component';
 import { AppArticleCardComponent } from '../../components/home/app-article-card/app-article-card.component';
 import { AppCategoryFilterComponent } from '../../components/home/app-category-filter/app-category-filter.component';
+import { ArticleService } from '../../services/article.service';
 
 @Component({
   selector: 'app-home',
@@ -14,4 +15,11 @@ import { AppCategoryFilterComponent } from '../../components/home/app-category-f
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  articleService = inject(ArticleService);
+  articlesNumber: number = 0;
+    ngOnInit(): void {
+    this.articlesNumber = this.articleService.getArticlesNumber();
+  }
+
+}
