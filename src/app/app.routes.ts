@@ -9,10 +9,10 @@ import { EditArticleComponent } from './pages/edit-article/edit-article.componen
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'article/:id', component: ArticleDetailComponent },
-  { path: 'edit/:id', component: EditArticleComponent },
-  { path: 'add', component: AddArticleComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '**', component: NotFoundComponent }
+  { path: 'article/:id', component: ArticleDetailComponent , title: 'تفاصيل المقال'},
+  { path: 'edit/:id', component: EditArticleComponent , title: 'تعديل المقال'},
+  { path: 'add', component: AddArticleComponent , title: 'إضافة مقال جديد'},
+  { path: 'login', component: LoginComponent , title: 'تسجيل الدخول'},
+  { path: 'register', component: RegisterComponent , title: 'التسجيل'},
+  { path: '**', component: NotFoundComponent , title: 'الصفحة غير موجودة'}
 ];
