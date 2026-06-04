@@ -5,10 +5,12 @@ import { AddArticleComponent } from './pages/add-article/add-article.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { EditArticleComponent } from './pages/edit-article/edit-article.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'article/:id', component: ArticleDetailComponent },
+  { path: 'edit/:id', component: EditArticleComponent },
   { path: 'add', component: AddArticleComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
