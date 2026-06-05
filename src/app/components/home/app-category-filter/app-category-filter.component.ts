@@ -1,7 +1,7 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ArticleService } from '../../../services/article.service';
+import { ArticleService } from '../../../core/services/article.service';
 
 interface IArticle {
   id: number;

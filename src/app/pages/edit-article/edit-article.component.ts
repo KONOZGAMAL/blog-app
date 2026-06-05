@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleService, IArticle } from '../../services/article.service';
+import { ArticleService, IArticle } from '../../core/services/article.service';
 
 @Component({
   selector: 'app-edit-article',

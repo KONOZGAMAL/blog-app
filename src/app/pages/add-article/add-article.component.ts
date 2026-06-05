@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { ArticleService } from '../../services/article.service';
+import { ArticleService } from '../../core/services/article.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -49,6 +49,7 @@ export class AddArticleComponent {
       image: formValue.imageUrl ?? '',
       readTime: formValue.readTime ?? '',
       content: formValue.content ?? '',
+      author: localStorage.getItem('userName') ?? '',
     };
     this.articleService.addArticle(article);
     this.toastr.success('تم إضافة المقال بنجاح');
