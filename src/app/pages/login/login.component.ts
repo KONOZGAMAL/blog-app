@@ -25,8 +25,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       if (email === this.loginForm.value.email && password === this.loginForm.value.password) {
         this.toastr.success('تم تسجيل الدخول بنجاح');
-        this.routerLink.navigate(['/']);
-        window.location.reload();
+        this.routerLink.navigate(['']);
       } else {
         this.toastr.error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
       }
