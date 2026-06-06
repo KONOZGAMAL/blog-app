@@ -52,20 +52,28 @@
   </ul>
 
   <div class="flex items-center gap-2">
-      <span *ngIf="userName" class="text-sm text-gray-500">مرحباً، {{ userName }}</span>
-    <button
-     routerLink="/login"
-     *ngIf="!userName"
-     class="flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all">
-      تسجيل الدخول
-    </button>
-    <button
-      routerLink="/add"
-      *ngIf="userName"
-      class="text-sm font-semibold text-white bg-primary px-4 py-1.5 rounded-lg hover:bg-primary/80 transition-all shrink-0"
-    >
-      + اكتب مقال
-    </button>
+    @if (authService.isLoggedIn()) {
+      <span class="hidden md:block text-sm text-gray-500">مرحباً، {{ authService.userName() }}</span>
+      <button
+        routerLink="/add"
+        class="text-sm font-semibold text-white bg-primary px-4 py-1.5 rounded-lg hover:bg-primary/80 transition-all shrink-0"
+      >
+        + اكتب مقال
+      </button>
+      <button
+        (click)="authService.logout()"
+        class="hidden md:flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all"
+      >
+        خروج
+      </button>
+    } @else {
+      <button
+        routerLink="/login"
+        class="flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all"
+      >
+        تسجيل الدخول
+      </button>
+    }
   </div>
 
 </nav>

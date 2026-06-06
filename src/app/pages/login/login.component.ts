@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink ,  Router} from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,21 +15,27 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
   formBuilder = inject(FormBuilder);
   toastr = inject(ToastrService);
-  routerLink = inject(Router);
+  router = inject(Router);
+  authService = inject(AuthService);
+
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
+
   submit() {
-    const email = localStorage.getItem('email');
-    const password = localStorage.getItem('password');
-    if (this.loginForm.valid) {
-      if (email === this.loginForm.value.email && password === this.loginForm.value.password) {
-        this.toastr.success('تم تسجيل الدخول بنجاح');
-        this.routerLink.navigate(['']);
-      } else {
-        this.toastr.error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
-      }
+    if (!this.loginForm.valid) return;
+
+    const savedEmail = localStorage.getItem('email');
+    const savedPassword = localStorage.getItem('password');
+    const savedUserName = localStorage.getItem('userName') ?? '';
+
+    if (savedEmail === this.loginForm.value.email && savedPassword === this.loginForm.value.password) {
+      this.authService.login(Date.now().toString(), savedUserName);
+      this.toastr.success('تم تسجيل الدخول بنجاح');
+      this.router.navigate(['/']);
+    } else {
+      this.toastr.error('البريد الإلكتروني أو كلمة المرور غير صحيحة');
     }
   }
 }
