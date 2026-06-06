@@ -1,79 +1,129 @@
-<nav class="flex items-center justify-between h-[60px] border-b border-gray-100 py-8">
+<nav class="border-b border-gray-100">
 
-  <a
-    routerLink="/"
-    class="flex items-center gap-2 text-xl font-bold text-gray-900 no-underline shrink-0"
-  >
-    <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
-    مدوّنتي
-  </a>
+  <!-- شريط النافبار الرئيسي -->
+  <div class="flex items-center justify-between h-[60px] py-8">
 
-  <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0">
-    <li>
-      <a
-        routerLink="/"
-        routerLinkActive="!text-primary bg-gray-100 font-semibold"
+    <a routerLink="/" (click)="closeMenu()"
+      class="flex items-center gap-2 text-xl font-bold text-gray-900 no-underline shrink-0">
+      <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+      مدوّنتي
+    </a>
+
+    <!-- لينكات Desktop -->
+    <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0">
+      <li>
+        <a routerLink="/" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
+          الرئيسية
+        </a>
+      </li>
+      <li>
+        <a routerLink="/articles" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
+          المقالات
+        </a>
+      </li>
+      <li>
+        <a routerLink="/categories" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
+          التصنيفات
+        </a>
+      </li>
+      <li>
+        <a routerLink="/about" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
+          عن الموقع
+        </a>
+      </li>
+    </ul>
+
+    <!-- أزرار Desktop + زرار Hamburger -->
+    <div class="flex items-center gap-2">
+
+      <!-- Desktop فقط -->
+      @if (authService.isLoggedIn()) {
+        <span class="hidden md:block text-sm text-gray-500">مرحباً، {{ authService.userName() }}</span>
+        <button routerLink="/add"
+          class="hidden md:flex text-sm font-semibold text-white bg-primary px-4 py-1.5 rounded-lg hover:bg-primary/80 transition-all">
+          + اكتب مقال
+        </button>
+        <button (click)="authService.logout()"
+          class="hidden md:flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all">
+          خروج
+        </button>
+      } @else {
+        <button routerLink="/login"
+          class="hidden md:flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all">
+          تسجيل الدخول
+        </button>
+      }
+
+      <!-- زرار Hamburger — موبايل فقط -->
+      <button (click)="toggleMenu()" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-all">
+        @if (menuOpen) {
+          <i class="ti ti-x text-xl text-gray-600"></i>
+        } @else {
+          <i class="ti ti-menu-2 text-xl text-gray-600"></i>
+        }
+      </button>
+
+    </div>
+  </div>
+
+  <!-- قائمة الموبايل -->
+  @if (menuOpen) {
+    <div class="md:hidden border-t border-gray-100 py-4 flex flex-col gap-1">
+
+      <a routerLink="/" routerLinkActive="!text-primary bg-gray-100 font-semibold"
         [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
-      >
+        (click)="closeMenu()"
+        class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         الرئيسية
       </a>
-    </li>
-    <li>
-      <a
-        routerLink="/articles"
-        routerLinkActive="!text-primary bg-gray-100 font-semibold"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
-      >
+      <a routerLink="/articles" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        (click)="closeMenu()"
+        class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         المقالات
       </a>
-    </li>
-    <li>
-      <a
-        routerLink="/categories"
-        routerLinkActive="!text-primary bg-gray-100 font-semibold"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
-      >
+      <a routerLink="/categories" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        (click)="closeMenu()"
+        class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         التصنيفات
       </a>
-    </li>
-    <li>
-      <a
-        routerLink="/about"
-        routerLinkActive="!text-primary bg-gray-100 font-semibold"
-        [routerLinkActiveOptions]="{ exact: true }"
-        class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline"
-      >
+      <a routerLink="/about" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+        (click)="closeMenu()"
+        class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         عن الموقع
       </a>
-    </li>
-  </ul>
 
-  <div class="flex items-center gap-2">
-    @if (authService.isLoggedIn()) {
-      <span class="hidden md:block text-sm text-gray-500">مرحباً، {{ authService.userName() }}</span>
-      <button
-        routerLink="/add"
-        class="text-sm font-semibold text-white bg-primary px-4 py-1.5 rounded-lg hover:bg-primary/80 transition-all shrink-0"
-      >
-        + اكتب مقال
-      </button>
-      <button
-        (click)="authService.logout()"
-        class="hidden md:flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all"
-      >
-        خروج
-      </button>
-    } @else {
-      <button
-        routerLink="/login"
-        class="flex items-center gap-1.5 text-sm text-gray-500 border border-gray-200 px-3 py-1 rounded-lg hover:bg-gray-50 transition-all"
-      >
-        تسجيل الدخول
-      </button>
-    }
-  </div>
+      <div class="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-2 px-1">
+        @if (authService.isLoggedIn()) {
+          <span class="text-sm text-gray-400 px-3">مرحباً، {{ authService.userName() }}</span>
+          <button routerLink="/add" (click)="closeMenu()"
+            class="text-sm font-semibold text-white bg-primary px-4 py-2.5 rounded-lg hover:bg-primary/80 transition-all text-center">
+            + اكتب مقال
+          </button>
+          <button (click)="authService.logout(); closeMenu()"
+            class="text-sm text-gray-500 border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 transition-all">
+            تسجيل الخروج
+          </button>
+        } @else {
+          <button routerLink="/login" (click)="closeMenu()"
+            class="text-sm text-gray-500 border border-gray-200 px-4 py-2.5 rounded-lg hover:bg-gray-50 transition-all">
+            تسجيل الدخول
+          </button>
+          <button routerLink="/register" (click)="closeMenu()"
+            class="text-sm font-semibold text-white bg-primary px-4 py-2.5 rounded-lg hover:bg-primary/80 transition-all">
+            إنشاء حساب
+          </button>
+        }
+      </div>
+
+    </div>
+  }
 
 </nav>
