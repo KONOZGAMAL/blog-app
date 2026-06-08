@@ -8,7 +8,7 @@ interface IArticle {
   category: string;
   title: string;
   description: string;
-  image: string;
+  imageUrl: string;
   readTime: string;
 }
 

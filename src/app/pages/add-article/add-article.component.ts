@@ -28,7 +28,7 @@ export class AddArticleComponent {
     category: ['', [Validators.required]],
     title: ['', [Validators.required]],
     description: ['', [Validators.required]],
-    imageUrl: ['', [Validators.required]],
+    imageUrl: ['', [Validators.required, Validators.pattern(/\.(jpg|jpeg|png)$/i)]],
     readTime: ['', [Validators.required]],
     content: ['', [Validators.required]],
   });
@@ -46,7 +46,7 @@ export class AddArticleComponent {
       category: formValue.category ?? '',
       title: formValue.title ?? '',
       description: formValue.description ?? '',
-      image: formValue.imageUrl ?? '',
+      imageUrl: formValue.imageUrl ?? '',
       readTime: formValue.readTime ?? '',
       content: formValue.content ?? '',
       author: localStorage.getItem('userName') ?? '',

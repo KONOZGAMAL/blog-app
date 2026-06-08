@@ -13,37 +13,92 @@
       </option>
     </select>
 
-    <input
-      type="text"
-      placeholder="العنوان"
-      class="w-full border p-2 rounded"
-      [formControlName]="'title'"
-    />
+    <div class="flex flex-col gap-1">
+      <input
+        type="text"
+        placeholder="العنوان"
+        class="w-full border p-2 rounded"
+        [formControlName]="'title'"
+      />
+      <span
+        *ngIf="
+          articleForm.get('title')?.invalid && articleForm.get('title')?.touched
+        "
+        class="text-sm text-red-500"
+      >
+        العنوان مطلوب.
+      </span>
+    </div>
 
-    <input
-      type="text"
-      formControlName="imageUrl"
-      placeholder="ضع رابط الصورة المباشر (.jpg أو .png)"
-      class="w-full border p-2 rounded"
-    />
-    <input
-      type="text"
-      placeholder="وقت القراءة (e.g. 5 min)"
-      class="w-full border p-2 rounded"
-      [formControlName]="'readTime'"
-    />
-    <textarea
-      placeholder="الوصف"
-      class="w-full border p-2 rounded"
-      [formControlName]="'description'"
-    ></textarea>
+    <div class="flex flex-col gap-1">
+      <input
+        type="text"
+        formControlName="imageUrl"
+        placeholder="ضع رابط الصورة المباشر (.jpg أو .png)"
+        class="w-full border p-2 rounded"
+      />
+      <span
+        *ngIf="
+          articleForm.get('imageUrl')?.invalid &&
+          articleForm.get('imageUrl')?.touched
+        "
+        class="text-sm text-red-500"
+      >
+        تأكد أن الرابط ينتهي بـ .jpg أو .jpeg أو .png وأنه رابط مباشر للصورة.
+      </span>
+    </div>
 
-    <textarea
-      placeholder="المحتوى الكامل للمقال"
-      rows="6"
-      class="w-full border p-2 rounded"
-      [formControlName]="'content'"
-    ></textarea>
+    <div class="flex flex-col gap-1">
+      <input
+        type="text"
+        placeholder="وقت القراءة (e.g. 5 min)"
+        class="w-full border p-2 rounded"
+        [formControlName]="'readTime'"
+      />
+      <span
+        *ngIf="
+          articleForm.get('readTime')?.invalid &&
+          articleForm.get('readTime')?.touched
+        "
+        class="text-sm text-red-500"
+      >
+        وقت القراءة مطلوب.
+      </span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <textarea
+        placeholder="الوصف"
+        class="w-full border p-2 rounded"
+        [formControlName]="'description'"
+      ></textarea>
+      <span
+        *ngIf="
+          articleForm.get('description')?.invalid &&
+          articleForm.get('description')?.touched
+        "
+        class="text-sm text-red-500"
+      >
+        الوصف مطلوب.
+      </span>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <textarea
+        placeholder="المحتوى الكامل للمقال"
+        rows="6"
+        class="w-full border p-2 rounded"
+        [formControlName]="'content'"
+      ></textarea>
+      <span
+        *ngIf="
+          articleForm.get('content')?.invalid &&
+          articleForm.get('content')?.touched
+        "
+        class="text-sm text-red-500"
+      >
+        المحتوى مطلوب.
+      </span>
+    </div>
 
     <button type="submit" class="bg-primary text-white px-4 py-2 rounded">
       إرسال
