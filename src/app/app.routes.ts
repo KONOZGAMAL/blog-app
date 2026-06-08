@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
+import { ArticlesComponent } from './pages/articles/articles.component';
 import { ArticleDetailComponent } from './pages/article-detail/article-detail.component';
 import { AddArticleComponent } from './pages/add-article/add-article.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -10,6 +11,7 @@ import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'articles', component: ArticlesComponent, title: 'جميع المقالات' },
   { path: 'article/:id', component: ArticleDetailComponent , title: 'تفاصيل المقال'},
   { path: 'edit/:id', component: EditArticleComponent , title: 'تعديل المقال' , canActivate: [authGuard]},
   { path: 'add', component: AddArticleComponent , title: 'إضافة مقال جديد' , canActivate: [authGuard]},

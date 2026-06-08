@@ -1,0 +1,82 @@
+<div class="py-10">
+
+  <!-- Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">جميع المقالات</h1>
+    <p class="text-gray-500">{{ filteredArticles.length }} مقال</p>
+  </div>
+
+  <div class="relative mb-6">
+    <i class="ti ti-search absolute top-1/2 -translate-y-1/2 end-4 text-gray-400 text-lg"></i>
+    <input
+      type="text"
+      [(ngModel)]="searchQuery"
+      placeholder="ابحث عن مقال..."
+      class="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 pe-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+    />
+  </div>
+
+  <!-- Category Filter -->
+  <ul class="flex flex-wrap gap-2 mb-8 list-none p-0 m-0">
+    @for (cat of categories; track cat) {
+      <li
+        (click)="activeCategory = cat"
+        [ngClass]="{
+          'bg-primary text-white': activeCategory === cat,
+          'bg-white text-gray-500 border border-gray-200': activeCategory !== cat
+        }"
+        class="cursor-pointer px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-primary hover:text-white transition-all"
+      >
+        {{ cat === 'all' ? 'الكل' : cat }}
+      </li>
+    }
+  </ul>
+
+  @if (filteredArticles.length > 0) {
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      @for (article of filteredArticles; track article.id) {
+        <div
+          (click)="openArticle(article.id)"
+          class="bg-white rounded-2xl overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300 ease-out shadow-sm border border-gray-100"
+        >
+          <img
+            [src]="article.imageUrl"
+            [alt]="article.title"
+            class="w-full h-44 object-cover"
+          />
+          <div class="p-5 flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-primary bg-primary/10 px-3 py-1 rounded-full">
+                {{ article.category }}
+              </span>
+              <span class="text-xs text-gray-400 flex items-center gap-1">
+                <i class="ti ti-clock"></i>
+                {{ article.readTime }}
+              </span>
+            </div>
+            <h3 class="font-bold text-gray-900 text-base leading-snug">{{ article.title }}</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">{{ truncate(article.description) }}</p>
+            @if (article.author) {
+              <p class="text-xs text-gray-400 flex items-center gap-1 mt-1">
+                <i class="ti ti-user"></i>
+                {{ article.author }}
+              </p>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center py-24 text-gray-400">
+      <i class="ti ti-search-off text-5xl mb-4"></i>
+      <p class="text-lg">لا توجد مقالات تطابق بحثك</p>
+      <button
+        (click)="searchQuery = ''; activeCategory = 'all'"
+        class="mt-4 text-primary hover:underline text-sm"
+      >
+        مسح الفلتر
+      </button>
+    </div>
+  }
+
+</div>

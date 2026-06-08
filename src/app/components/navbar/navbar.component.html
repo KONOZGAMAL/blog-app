@@ -25,7 +25,7 @@
           المقالات
         </a>
       </li>
-      <li>
+      <!-- <li>
         <a routerLink="/categories" routerLinkActive="!text-primary bg-gray-100 font-semibold"
           [routerLinkActiveOptions]="{ exact: true }"
           class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
@@ -38,7 +38,7 @@
           class="text-sm text-gray-500 px-4 cursor-pointer py-1.5 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
           عن الموقع
         </a>
-      </li>
+      </li> -->
     </ul>
 
     <!-- أزرار Desktop + زرار Hamburger -->
@@ -89,7 +89,7 @@
         class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         المقالات
       </a>
-      <a routerLink="/categories" routerLinkActive="!text-primary bg-gray-100 font-semibold"
+      <!-- <a routerLink="/categories" routerLinkActive="!text-primary bg-gray-100 font-semibold"
         (click)="closeMenu()"
         class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         التصنيفات
@@ -98,7 +98,7 @@
         (click)="closeMenu()"
         class="text-sm text-gray-600 px-4 py-3 rounded-lg hover:bg-gray-100 hover:text-primary transition-all no-underline">
         عن الموقع
-      </a>
+      </a> -->
 
       <div class="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-2 px-1">
         @if (authService.isLoggedIn()) {
